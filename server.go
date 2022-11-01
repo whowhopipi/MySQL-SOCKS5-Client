@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"sync"
 	"time"
+	"flag"
 )
 
 type ConfigStruct struct {
@@ -23,8 +24,16 @@ type ConfigStruct struct {
 }
 
 func main() {
+
+    // 配置文件
+    var configFile string
+
+    flag.StringVar(&configFile,"c","/etc/mysql-socket5-proxy/config.json","配置文件")
+
+    flag.Parse()
+
 	// 打开json文件
-	jsonFile, err := os.Open("config.json")
+	jsonFile, err := os.Open(configFile)
 
 	if err != nil {
 		fmt.Println(err)
